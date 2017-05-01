@@ -22,17 +22,20 @@ app.config(['$routeProvider',
     }]);
 
 app.controller("tenant1_controller",function($scope,$http){
-	console.log("Reporting from tenant1 controller");
+	console.log("Reporting from Tenant 1 controller");
 	});
 
 app.controller("tenant2_controller",function($scope,$http){
-	console.log("Reporting from tenant2 controller");
+	console.log("Reporting from Tenant 2 controller");
 	});
 app.controller("tenant3_controller",function($scope,$http){
-    console.log("Reporting from tenant 3 controller");
-});
+	console.log("Reporting from Tenant 3 controller");
+	});
+
 app.controller("tenant4_controller",function($scope,$http){
-    console.log("Reporting from tenant 4 controller");
-});
+	console.log("Reporting from Tenant 4 controller");
+	});
+
+
 
 
