@@ -16,11 +16,33 @@ app.config(['$routeProvider','$locationProvider',
              }).when('/tenant4', {
                  templateUrl: '../static/partials/tenant4.html',
                  controller:"tenant4_controller"
-             });
+             }).otherwise({
+                   redirect: '/'
+           });
     }]);
 
 app.controller("tenant1_controller",function($scope,$http){
 	console.log("Reporting from Tenant 1 controller");
+	console.log($scope.comments);
+	$scope.showuml=false;
+	$scope.showgrade=false;
+	    $scope.upload=function(){
+	        console.log("Reporting from upload tenant 1");
+	        console.log("Folder path---",$scope.path)
+	    };
+
+	    $scope.generateUML=function(){
+	        console.log("Reporting from generate URL tenant1");
+	        $scope.showuml=true;
+	        $scope.showgrade=true;
+	    };
+	    $scope.grade=function(){
+	        console.log("Reporting from grade");
+	        console.log(document.getElementById("complete").checked);
+	        console.log("Points---",$scope.points);
+	        console.log("Comments--",$scope.comments);
+	    };
+
 	});
 
 app.controller("tenant2_controller",function($scope,$http){

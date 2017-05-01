@@ -5,7 +5,60 @@
 </head>
 
 <body>
-        <h1>Hello from tenant 1</h1>
+        <h1>Tenant 1 UML parser</h1>
+        <br>
+        <br>
+        Upload Folder
+        <input type="text" ng-model="path" placeholder="Enter your folder path">
+        <button ng-click="upload()">Upload</button>
+        <br>
+        <br>
+        <br>
+        <button ng-click="generateUML()">Generate UML Diagram</button>
+        <br>
+        <br>
+        <p>UML Diagram generated</p>
+        <div ng-if="showuml">
+
+            <img src="http://agilemodeling.com/images/models/classDiagramInitial.jpg" style="width:70%">
+
+        </div>
+
+        <div ng-if="showgrade">
+
+            Grading
+            <br>
+            <br>
+            <div class="w3-tag w3-large w3-orange">Complete</div>
+            <br>
+            <br>
+
+            <label class="switch">
+                <input type="checkbox" id="complete" ng-click="grade()">
+                <div class="slider round"></div>
+            </label>
+
+            <br>
+            <br>
+
+            <div class="w3-tag w3-large w3-orange">Points</div>
+
+            <select ng-model="points">
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="75">75</option>
+                <option value="100">100</option>
+            </select>
+
+            <textarea rows="4" cols="50" ng-model="comments">
+            Enter comments for this submission.
+            </textarea>
+            <br>
+            <br>
+            <button ng-click="grade()">Submit</button>
+
+        </div>
+
 
 </body>
 
