@@ -1,6 +1,7 @@
 var app = angular.module('myapp', ['ngRoute']);
-app.config(['$routeProvider',
-     function($routeProvider) {
+app.config(['$routeProvider','$locationProvider',
+     function($routeProvider,$locationProvider) {
+     $locationProvider.html5Mode(true);
      $routeProvider.
              when('/tenant1', {
                  templateUrl: '/static/partials/tenant1.html',
@@ -15,7 +16,7 @@ app.config(['$routeProvider',
              }).when('/tenant4', {
                  templateUrl: '../static/partials/tenant4.html',
                  controller:"tenant4_controller"
-             })
+             });
     }]);
 
 app.controller("tenant1_controller",function($scope,$http){
