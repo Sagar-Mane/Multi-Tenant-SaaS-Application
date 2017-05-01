@@ -1,7 +1,7 @@
 var app = angular.module('myapp', ['ngRoute']);
 app.config(['$routeProvider',
      function($routeProvider) {
-         $routeProvider.
+     $routeProvider.
              when('/tenant1', {
                  templateUrl: '/static/partials/tenant1.html',
                  controller:"tenant1_controller"
@@ -15,10 +15,7 @@ app.config(['$routeProvider',
              }).when('/tenant4', {
                  templateUrl: '../static/partials/tenant4.html',
                  controller:"tenant4_controller"
-             }).
-             otherwise({
-                 redirectTo: '/'
-             });
+             })
     }]);
 
 app.controller("tenant1_controller",function($scope,$http){
@@ -35,7 +32,6 @@ app.controller("tenant3_controller",function($scope,$http){
 app.controller("tenant4_controller",function($scope,$http){
 	console.log("Reporting from Tenant 4 controller");
 	});
-
 
 
 
