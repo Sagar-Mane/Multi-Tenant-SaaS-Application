@@ -23,19 +23,31 @@ app.config(['$routeProvider','$locationProvider',
 
 app.controller("tenant1_controller",function($scope,$http){
 	console.log("Reporting from Tenant 1 controller");
-	console.log($scope.comments);
 	$scope.showuml=false;
 	$scope.showgrade=false;
-	    $scope.upload=function(){
-	        console.log("Reporting from upload tenant 1");
-	        console.log("Folder path---",$scope.path)
-	    };
 
 	    $scope.generateUML=function(){
-	        console.log("Reporting from generate URL tenant1");
-	        $scope.showuml=true;
+
+	        console.log("Testing");
+        $http({
+            method: 'POST',
+            url: "/generateUML",
+        }).success(function(data){
+            $scope.gameBoy();
+            })
+	   };
+	   $scope.gameBoy=function(){
+
+	        $http({
+            method: 'GET',
+            url: "/getResult",
+        }).success(function(data){
+            $scope.image=data;
+            $scope.showuml=true;
 	        $scope.showgrade=true;
-	    };
+        })
+	   }
+
 	    $scope.grade=function(){
 	        console.log("Reporting from grade");
 	        console.log(document.getElementById("complete").checked);

@@ -8,18 +8,21 @@
         <h1>Tenant 1 UML parser</h1>
         <br>
         <br>
-        Upload Folder
-        <input type="text" ng-model="path" placeholder="Enter your folder path">
-        <button ng-click="upload()">Upload</button>
+
+         <form method=post enctype=multipart/form-data action="http://127.0.01:5000/uploadCode">
+             <p>Select Source Code Zip</p><input type=file name=file>
+             <input type=submit value=Upload>
+         </form>
+
         <br>
         <br>
         <br>
         <button ng-click="generateUML()">Generate UML Diagram</button>
         <br>
         <br>
-        <p>UML Diagram generated</p>
-        <div ng-if="showuml">
 
+        <div ng-if="showuml">
+         <p>UML Diagram generated</p>
             <img src="http://agilemodeling.com/images/models/classDiagramInitial.jpg" style="width:70%">
 
         </div>
