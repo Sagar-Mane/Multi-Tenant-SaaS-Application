@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" href="static/styles/style.css">
+    <link rel="stylesheet" href="public/styles/stylesheet.css">
 </head>
 
 <body>
@@ -9,10 +9,12 @@
         <br>
         <br>
 
-         <form method=post enctype=multipart/form-data action="http://127.0.01:5000/uploadCode">
-             <p>Select Source Code Zip</p><input type=file name=file>
-             <input type=submit value=Upload>
-         </form>
+        <div class="col-md-5 col-md-offset-1" style="border-right: 1px solid black;">
+			<input type="file" file-model="myFile" class="btn btn-info" style= "width:350px;"
+				accept="application/x-zip-compressed" /><br/><br>
+			<button class="btn btn-primary" ng-click="uploadFile('t1')" style= "width:350px;">upload me</button>
+            <p ng-show="upload_status">{{status_code}}</p>
+		</div>
 
         <br>
         <br>
@@ -21,13 +23,13 @@
         <br>
         <br>
 
-        <div ng-if="showuml">
+        <div ng-show="showuml">
          <p>UML Diagram generated</p>
             <img src="http://agilemodeling.com/images/models/classDiagramInitial.jpg" style="width:70%">
 
         </div>
 
-        <div ng-if="showgrade">
+        <div ng-show="showgrade">
 
             Grading
             <br>
@@ -37,7 +39,7 @@
             <br>
 
             <label class="switch">
-                <input type="checkbox" id="complete" ng-click="grade()">
+                <input type="checkbox" id="complete">
                 <div class="slider round"></div>
             </label>
 
