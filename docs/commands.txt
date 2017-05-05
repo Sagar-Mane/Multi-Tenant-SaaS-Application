@@ -1,0 +1,14 @@
+Install java 8 linux
+sudo yum install java-1.8.0-openjdk-devel
+
+
+** Select Java 8 Option for: **
+
+            sudo /usr/sbin/alternatives --config java
+            sudo /usr/sbin/alternatives --config javac
+			
+			
+			
+installing graphviz
+
+sudo yum install -y graphviz
