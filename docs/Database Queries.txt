@@ -1,0 +1,37 @@
+Multi Tenant Database for SaaS Application.
+Queries
+
+1.select tenant_id from tenant_mapping where tenant_name="kaushik"
+
+
+//INSERT into tenant_specific_data` multiple inserts
+2.INSERT INTO `multi-tenant-data`.`tenant_specific_data`
+(`student_id`,
+`key`,
+`value`)
+VALUES
+(4,
+'Grade',
+'3'), (8,'Outof','5');
+ 
+
+//INSERT into tenant_specific_data` single insert 
+3.INSERT INTO `multi-tenant-data`.`tenant_specific_data`
+(`student_id`,
+`key`,
+`value`)
+VALUES
+(4,
+'Grade',
+'3');
+ 
+ 
+//INSERT into Shared_data
+4.INSERT INTO `multi-tenant-data`.`tenant_shared_data`
+(`tenant_id`,
+`comments`,
+`student_id`) 
+VALUES 
+(8,
+'fff', 
+4);
