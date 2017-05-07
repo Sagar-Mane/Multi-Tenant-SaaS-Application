@@ -168,7 +168,7 @@ app.controller('tenant2_controller', ['$scope','$http', 'fileUpload', function($
         console.log("Reporting from generateUML POST Angular");
         $http({
             method: 'POST',
-            url: "http://127.0.0.1:5000/generateUML",
+            url: "http://127.0.0.1:70/generateUML",
         }).success(function(data){
             $scope.getUML();
             })
@@ -177,7 +177,7 @@ app.controller('tenant2_controller', ['$scope','$http', 'fileUpload', function($
 
 	        $http({
             method: 'GET',
-            url: "http://127.0.0.1:5000/getUML",
+            url: "http://127.0.0.1:70/getUML",
         }).success(function(data){
                 console.log(data);
             $scope.image=data.result;
@@ -196,7 +196,7 @@ app.controller('tenant2_controller', ['$scope','$http', 'fileUpload', function($
     $scope.uploadFile = function(){
         var file = $scope.myFile;
         console.log("Reporting fro uploadFile POST Angular");
-        var uploadUrl = "http://127.0.0.1:5000/uploadCode";
+        var uploadUrl = "http://127.0.0.1:70/uploadCode";
         fileUpload.uploadFileToUrl(file, uploadUrl, function(data) {
         	console.log(data.Upload_Code_Status);
         	$scope.upload_status=true;

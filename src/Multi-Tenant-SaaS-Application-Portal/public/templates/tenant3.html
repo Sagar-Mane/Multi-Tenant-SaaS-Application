@@ -1,1 +1,66 @@
-<h1>Hello Tenant 3</h1>
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="public/styles/stylesheet.css">
+</head>
+
+<body>
+        <h1>Tenant 3 UML parser</h1>
+        <br>
+        <br>
+
+        <div class="col-md-5 col-md-offset-1" style="border-right: 1px solid black;">
+			<input type="file" file-model="myFile" class="btn btn-info" style= "width:350px;"
+				accept="application/x-zip-compressed" /><br/><br>
+			<button class="btn btn-primary" ng-click="uploadFile('t1')" style= "width:350px;">upload me</button>
+            <p ng-show="upload_status">{{status_code}}</p>
+		</div>
+
+        <br>
+        <br>
+        <br>
+        <button ng-click="generateUML()">Generate UML Diagram</button>
+        <br>
+        <br>
+
+        <div ng-show="showuml">
+         <p>UML Diagram generated</p>
+            <img src="data:image/JPEG;base64,{{image}}" style="width:70%">
+
+        </div>
+
+        <div ng-show="showgrade">
+
+            Grading
+            <br>
+            <br>
+            <div class="w3-tag w3-large w3-orange">Complete</div>
+            <br>
+            <br>
+            
+            <br>
+            <br>
+
+            <div class="w3-tag w3-large w3-orange">Points</div>
+
+            <select ng-model="points">
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="75">75</option>
+                <option value="100">100</option>
+            </select>
+
+            <textarea rows="4" cols="50" ng-model="comments">
+            Enter comments for this submission.
+            </textarea>
+            <br>
+            <br>
+            <button ng-click="grade()">Submit</button>
+
+        </div>
+
+
+</body>
+
+
+</html>
