@@ -70,23 +70,23 @@ def getResult():
         encoded_string = base64.b64encode(image_file.read())
         resp = jsonify({"result": encoded_string})
         resp.headers['Access-Control-Allow-Origin'] = '*'
-
-        clean_dir()
-
+        #clean_dir()
         return resp
 
 def clean_dir():
+    print "Cleaning Uploaded Directory"
     import os, shutil
-    folder = 'SourceCode/Extracted'
+    folder = 'SourceCode'
     for the_file in os.listdir(folder):
         file_path = os.path.join(folder, the_file)
         try:
             if os.path.isfile(file_path):
                 os.unlink(file_path)
-                # elif os.path.isdir(file_path): shutil.rmtree(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
         except Exception as e:
             print(e)
 
 if __name__ == "__main__":
-    print "Python Server Running at port 5000"
-    app.run(port=70)
+    print "Python Server Running at port 92"
+    app.run(port=92)

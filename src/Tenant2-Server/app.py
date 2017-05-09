@@ -1,3 +1,6 @@
+from threading import Thread
+
+import time
 from flask import send_file, jsonify, flash
 import generate_uml
 import os
@@ -5,6 +8,7 @@ import base64
 from flask import Flask, request, redirect
 from werkzeug.utils import secure_filename
 import zipfile
+import os, shutil
 
 app = Flask(__name__)
 
@@ -66,12 +70,27 @@ def unzip(filename):
 @app.route("/getUML", methods=(['GET']))
 def getResult():
     print "Returning image"
+
     with open("SourceCode/Extracted/pic.jpeg", "rb") as image_file:
         encoded_string = base64.b64encode(image_file.read())
         resp = jsonify({"result": encoded_string})
         resp.headers['Access-Control-Allow-Origin'] = '*'
+        # clean_dir()
         return resp
 
+def clean_dir():
+    print "Cleaning Uploaded Directory"
+    folder = 'SourceCode'
+    for the_file in os.listdir(folder):
+        file_path = os.path.join(folder, the_file)
+        try:
+            if os.path.isfile(file_path):
+                os.unlink(file_path)
+            elif os.path.isdir(file_path):
+                shutil.rmtree(file_path)
+        except Exception as e:
+            print(e)
+
 if __name__ == "__main__":
-    print "Python Server Running at port 5000"
-    app.run(port=80)
+    print "Python Server Running at port 91"
+    app.run(port=91)
