@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+</head>
+
+<body>
+        <h1>Tenant 2 UML parser</h1>
+        <br>
+        <br>
+
+        <div class="col-md-6 col-md-offset-1">
+        
+			<input type="file" file-model="myFile"  style= "width:350px;"
+				accept="application/x-zip-compressed" /><br/><br>
+			<button class="btn btn-danger" ng-click="uploadFile('t1')">Submit Source Code</button>
+            <br>
+            <br>
+            
+            <p ng-show="upload_status">Upload Status: {{status_code}}</p>
+		</div>
+
+        <br>
+        <br>
+        
+    <div class="col-md-12 col-md-offset-1" style="border-right: 1px solid black;">
+        <br>
+        
+        <button ng-show="show_generate_uml" class="btn btn-success" ng-click="generateUML()">Generate UML Diagram</button>
+        <br>
+        <br>
+
+        <div ng-show="showuml">
+         
+         <h1>UML Diagram generated</h1>
+         <br>
+            <img ng-src="data:image/JPEG;base64,{{image}}" style="width:70%">
+
+        </div>
+
+        <div ng-show="showgrade">
+			<br><br>
+            <h1>Grading</h1>
+            <br>
+            <br>
+            
+            <div class="w3-tag w3-large w3-orange">Complete</div>
+            <br>
+            <br>
+
+            <label class="switch">
+                <input type="checkbox" id="complete">
+                <div class="slider round"></div>
+            </label>
+
+            <br>
+            <br>
+
+            <div class="w3-tag w3-large w3-orange">Marks</div>
+
+            <input type="number" ng-model="points" min="0" max="100">
+			<br>
+			<br>
+			<h4>Comments</h4>
+            <textarea rows="4" cols="50" ng-model="comments">
+            Enter comments for this submission.
+            </textarea>
+            <br>
+            <br>
+            <button class="btn btn-success" ng-click="grade()">Submit</button>
+            <br>
+            
+            <div class="col-md-8" style="margin: 10px;">
+					<div class="alert alert-success" ng-hide="submission">
+						<strong>Reponses recorded into the database.</strong>
+					</div>
+			</div>
+            
+            <br>
+
+        </div>
+    </div>
+
+</body>
+
+
+</html>
