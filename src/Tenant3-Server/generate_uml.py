@@ -1,7 +1,7 @@
 from subprocess import *
 
 def jarWrapper(*args):
-    process = Popen(['java', '-cp']+list(args), stdout=PIPE, stderr=PIPE)
+    process = Popen(['java', '-jar']+list(args), stdout=PIPE, stderr=PIPE)
     retString = []
     while process.poll() is None:
         line = process.stdout.readline()

@@ -16,17 +16,13 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route("/login")
-def login():
-    return send_file("templates/login.html")
-
-@app.route("/")
+@app.route("/tenant1")
 def main():
     resp = jsonify({"Ping": "success"})
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
 
-@app.route("/generateUML", methods=['POST'])
+@app.route("/tenant1/generateUML", methods=['POST'])
 def generateUML():
     print "Reporting from Run Jar Api"
     args = ['umlparser.jar', "SourceCode/Extracted", "result.png"] # Any number of args to be passed to the jar file
@@ -36,7 +32,7 @@ def generateUML():
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
 
-@app.route("/uploadCode", methods=['GET', 'POST'])
+@app.route("/tenant1/uploadCode", methods=['GET', 'POST'])
 def upload_code():
     if request.method == 'POST':
         # check if the post request has the file part
@@ -67,7 +63,7 @@ def unzip(filename):
     zip_ref.close()
     return "Unzipped"
 
-@app.route("/getUML", methods=(['GET']))
+@app.route("/tenant1/getUML", methods=(['GET']))
 def getResult():
     print "Returning image"
     with open("result.png", "rb") as image_file:

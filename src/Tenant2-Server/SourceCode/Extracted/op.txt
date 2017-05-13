@@ -13,6 +13,39 @@ B : - a : A
 class C
 C - "1" A
 C : - a : A
+class ConcreteObserver
+ConcreteObserver : +ConcreteObserver(ConcreteSubject theSubject)
+Observer <|..  ConcreteObserver
+ConcreteObserver - "1" ConcreteSubject
+ConcreteObserver : +update():void
+ConcreteObserver : +showState():void
+Subject <|..  ConcreteSubject
+ConcreteSubject : - subjectState : String
+ConcreteSubject - "*" Observer
+ConcreteSubject : - observers : Collection<Observer>
+ConcreteSubject : +getState():String
+ConcreteSubject : +setState(String status):void
+Observer<.. ConcreteSubject:uses
+ConcreteSubject : +attach(Observer obj):void
+ConcreteSubject : +detach(Observer obj):void
+ConcreteSubject : +notifyObservers():void
+ConcreteSubject : +showState():void
 class D
 D : - a : A
+interface Observer
+class Optimist
+ConcreteObserver <|-- Optimist
+Optimist : +Optimist(ConcreteSubject sub)
+Optimist : +update():void
+class Pessimist
+ConcreteObserver <|-- Pessimist
+Pessimist : +Pessimist(ConcreteSubject sub)
+Pessimist : +update():void
+interface Subject
+Subject : +attach(Observer obj):void
+Subject : +detach(Observer obj):void
+Subject : +notifyObservers():void
+class TheEconomy
+ConcreteSubject <|-- TheEconomy
+TheEconomy : +TheEconomy(null)
 @enduml

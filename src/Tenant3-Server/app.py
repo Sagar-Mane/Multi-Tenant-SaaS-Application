@@ -16,23 +16,23 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route("/")
+@app.route("/tenant3")
 def main():
     resp = jsonify({"Ping": "success"})
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
 
-@app.route("/generateUML", methods=['POST'])
+@app.route("/tenant3/generateUML", methods=['POST'])
 def generateUML():
     print "Reporting from Run Jar Api"
-    args = ['MyUmlParser.jar', "UmlParser", "class", "SourceCode/Extracted", "result"]    # Any number of args to be passed to the jar file
+    args = ['UmlParser.jar', "umlparser", "SourceCode/Extracted", "SourceCode/Extracted/result"]    # Any number of args to be passed to the jar file
     result = generate_uml.jarWrapper(*args)
     print result
     resp = jsonify({"Generate_UML_Status": "success"})
     resp.headers['Access-Control-Allow-Origin'] = '*'
     return resp
 
-@app.route("/uploadCode", methods=['GET', 'POST'])
+@app.route("/tenant3/uploadCode", methods=['GET', 'POST'])
 def upload_code():
     if request.method == 'POST':
         # check if the post request has the file part
@@ -63,7 +63,7 @@ def unzip(filename):
     zip_ref.close()
     return "Unzipped"
 
-@app.route("/getUML", methods=(['GET']))
+@app.route("/tenant3/getUML", methods=(['GET']))
 def getResult():
     print "Returning image"
     with open("SourceCode/Extracted/result.png", "rb") as image_file:
@@ -88,5 +88,5 @@ def clean_dir():
             print(e)
 
 if __name__ == "__main__":
-    print "Python Server Running at port 92"
-    app.run(port=92)
+    print "Tenant 3 Server Running at port 92"
+    app.run(host="0.0.0.0",port=92)
