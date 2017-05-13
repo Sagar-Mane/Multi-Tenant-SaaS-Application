@@ -8,7 +8,14 @@ var submitGrades = function (req, res) {
     var tenant_id=req.param("tenant_id");
     var comments=req.param("comments");
     var student_id=req.param("student_id");
+    console.log(typeof(student_id));
     
+    if(typeof(student_id)=="undefined"){
+    	console.log("Error will come ####################################################");
+    	var response={"statusCode":401};
+    	res.send(response);
+    	
+    }
     console.log("Reporting inputs",tenant_id+"  "+ comments+"  "+ student_id);
 
     var TenantInsertQuery = "INSERT INTO tenant_shared_data ( tenant_id, comments, student_id) VALUES ('" +
@@ -55,6 +62,7 @@ var submitGrades = function (req, res) {
                         mysql.fetchData(function(err, results) {
 
                             if (err) {
+                            	console.log("sagarrrrrrrrrrrrrrrr testing");
                                 throw err;
                             } else {
                                 if (results.length > 0) {
@@ -66,7 +74,6 @@ var submitGrades = function (req, res) {
                                     res.send(json_responses);
 
                                 } else {
-
                                     console.log("tenant details inserted!");
                                     json_responses = {
                                         "statusCode" : 200
@@ -96,7 +103,7 @@ var submitGrades = function (req, res) {
 
                                     console.log("something went wrong!");
                                     var json_responses = {
-                                        "statusCode" : 200
+                                        "statusCode" : 401
                                     };
                                     res.send(json_responses);
 
@@ -104,7 +111,7 @@ var submitGrades = function (req, res) {
 
                                     console.log("tenant details inserted!");
                                     json_responses = {
-                                        "statusCode" : 401
+                                        "statusCode" : 200
                                     };
                                     res.send(json_responses);
                                 }
@@ -131,7 +138,7 @@ var submitGrades = function (req, res) {
 
                                     console.log("something went wrong!");
                                     var json_responses = {
-                                        "statusCode" : 200
+                                        "statusCode" : 401
                                     };
                                     res.send(json_responses);
 
@@ -139,7 +146,7 @@ var submitGrades = function (req, res) {
 
                                     console.log("tenant details inserted!");
                                     json_responses = {
-                                        "statusCode" : 401
+                                        "statusCode" : 200
                                     };
                                     res.send(json_responses);
                                 }
@@ -166,7 +173,7 @@ var submitGrades = function (req, res) {
 
                                     console.log("something went wrong!");
                                     var json_responses = {
-                                        "statusCode" : 200
+                                        "statusCode" : 401
                                     };
                                     res.send(json_responses);
 
@@ -174,7 +181,7 @@ var submitGrades = function (req, res) {
 
                                     console.log("tenant details inserted!");
                                     json_responses = {
-                                        "statusCode" : 401
+                                        "statusCode" : 200
                                     };
                                     res.send(json_responses);
                                 }
@@ -182,7 +189,7 @@ var submitGrades = function (req, res) {
                         }, TenantInsertQuery1);
                         break;
                 }
-                res.send(json_responses);
+                //res.send(json_responses);
             }
         }
     }, TenantInsertQuery);

@@ -51,7 +51,6 @@ app.service('fileUpload', ['$http', function ($http) {
         	cb(data);
         })
         .error(function(err){
-        	console.log(err);
         	cb(err);
         });
     }
@@ -59,19 +58,19 @@ app.service('fileUpload', ['$http', function ($http) {
 
 app.controller('tenant1_controller', ['$scope','$http', 'fileUpload', function($scope,$http, fileUpload){
 
-    console.log("Reporting from Tenant 1 controller");
-	$scope.showuml=false;
+    $scope.showuml=false;
 	$scope.showgrade=false;
 	$scope.upload_status=false;
 	$scope.show_generate_uml=false;
-	$scope.submission=true;
+	$scope.submission_valid=true;
+	$scope.submission_invalid=true;
 	
 	
 	    $scope.generateUML=function(){
 
         $http({
             method: 'POST',
-            url: "http://localhost:90/generateUML",
+            url: "http://localhost:90/tenant1/generateUML",
         }).success(function(data){
             $scope.getUML();
             })
@@ -80,7 +79,7 @@ app.controller('tenant1_controller', ['$scope','$http', 'fileUpload', function($
 
 	        $http({
             method: 'GET',
-            url: "http://localhost:90/getUML",
+            url: "http://localhost:90/tenant1/getUML",
         }).success(function(data){
                
             $scope.image=data.result;
@@ -90,16 +89,12 @@ app.controller('tenant1_controller', ['$scope','$http', 'fileUpload', function($
 	   }
 
 	    $scope.grade=function(){
-	        console.log("Reporting from grade POST Angular");
 	        if(document.getElementById("complete").checked){
 	        	$scope.status="complete";
 	        }
 	        else
 	        	$scope.status="Incomplete"
-	        console.log(document.getElementById("complete").checked);
 	        var status=document.getElementById("complete").checked;
-	        console.log("Points---",$scope.points);
-	        console.log("Comments--",$scope.comments);
 	        $http({
 	            method: 'POST',
 	            url: "/submitGrades",
@@ -111,14 +106,25 @@ app.controller('tenant1_controller', ['$scope','$http', 'fileUpload', function($
 	            	"points":$scope.points
 	            }
 	        }).success(function(data){
-	        	console.log("Done grading");
-	        	$scope.submission=false;	
+	        	console.log("Status-",data.statusCode);
+	        	
+	        	if(data.statusCode==200){
+	        		$scope.submission_valid=false;
+		        	$scope.submission_invalid=true;
+	        	}
+	        	else{
+	        		$scope.submission_valid=true;
+		        	$scope.submission_invalid=false;
+	        	}
+	        	
+	        	
+	        	
 	        });
 	    };
 
     $scope.uploadFile = function(){
         var file = $scope.myFile;
-        var uploadUrl = "http://localhost:90/uploadCode";
+        var uploadUrl = "http://localhost:90/tenant1/uploadCode";
         fileUpload.uploadFileToUrl(file, uploadUrl, function(data) {
         	$scope.upload_status=true;
         	$scope.status_code = data.Upload_Code_Status;
@@ -132,18 +138,21 @@ app.controller('tenant1_controller', ['$scope','$http', 'fileUpload', function($
 /*-----------------------------------------Tenant 2 Controller---------------------------------------------------------------------------------*/
 app.controller('tenant2_controller', ['$scope','$http', 'fileUpload', function($scope,$http, fileUpload){
 
-    console.log("Reporting from Tenant 2 controller");
-	$scope.showuml=false;
+    $scope.showuml=false;
 	$scope.showgrade=false;
 	$scope.upload_status=false;
 	$scope.show_generate_uml=false;
 	$scope.submission=true;
+	$scope.submission_valid=true;
+	$scope.submission_invalid=true;
+	$scope.submission_valid=true;
+	$scope.submission_invalid=true;
 	
 	    $scope.generateUML=function(){
 
         $http({
             method: 'POST',
-            url: "http://localhost:91/generateUML",
+            url: "http://localhost:91/tenant2/generateUML",
         }).success(function(data){
             $scope.getUML();
             })
@@ -152,7 +161,7 @@ app.controller('tenant2_controller', ['$scope','$http', 'fileUpload', function($
 
 	        $http({
             method: 'GET',
-            url: "http://localhost:91/getUML",
+            url: "http://localhost:91/tenant2/getUML",
         }).success(function(data){
             $scope.image=data.result;
             $scope.showuml=true;
@@ -162,9 +171,6 @@ app.controller('tenant2_controller', ['$scope','$http', 'fileUpload', function($
 	   }
 
 	    $scope.grade=function(){
-	        console.log("Reporting from grade POST Angular");
-	        console.log("Points---",$scope.points);
-	        console.log("Comments--",$scope.comments);
 	        
 	        if(document.getElementById("complete").checked){
 	        	$scope.status="complete";
@@ -183,16 +189,22 @@ app.controller('tenant2_controller', ['$scope','$http', 'fileUpload', function($
 	 	            	"points":$scope.points
 	 	            }
 	        }).success(function(data){
-	        	console.log("Done grading");
-	        	$scope.submission=false;	
+	        	console.log(data.statusCode);
+	        	if(data.statusCode==200){
+	        		$scope.submission_valid=false;
+	            	$scope.submission_invalid=true;
+	        	}
+	        	else{
+	        		$scope.submission_valid=true;
+	            	$scope.submission_invalid=false;
+	        	}	
 	        });
 	    };
 
     $scope.uploadFile = function(){
         var file = $scope.myFile;
-        var uploadUrl = "http://localhost:91/uploadCode";
+        var uploadUrl = "http://localhost:91/tenant2/uploadCode";
         fileUpload.uploadFileToUrl(file, uploadUrl, function(data) {
-        	console.log(data.Upload_Code_Status);
         	$scope.upload_status=true;
         	$scope.status_code = data.Upload_Code_Status;
         	$scope.show_generate_uml=true;
@@ -202,18 +214,19 @@ app.controller('tenant2_controller', ['$scope','$http', 'fileUpload', function($
 /*-------------------------------------------------Tenant 3 Controller------------------------------------------------------------------------*/
     app.controller('tenant3_controller', ['$scope','$http', 'fileUpload', function($scope,$http, fileUpload){
 
-    console.log("Reporting from Tenant 3 controller");
-	$scope.showuml=false;
+    $scope.showuml=false;
 	$scope.showgrade=false;
 	$scope.upload_status=false;
 	$scope.show_generate_uml=false;
 	$scope.submission=true;
+	$scope.submission_valid=true;
+	$scope.submission_invalid=true;
 	
 	    $scope.generateUML=function(){
 	    	
 	    	$http({
             method: 'POST',
-            url: "http://localhost:92/generateUML",
+            url: "http://localhost:92/tenant3/generateUML",
         }).success(function(data){
             $scope.getUML();
             })
@@ -222,9 +235,8 @@ app.controller('tenant2_controller', ['$scope','$http', 'fileUpload', function($
 
 	        $http({
             method: 'GET',
-            url: "http://localhost:92/getUML",
+            url: "http://localhost:92/tenant3/getUML",
         }).success(function(data){
-                console.log(data);
             $scope.image=data.result;
             $scope.showuml=true;
 	        $scope.showgrade=true;
@@ -232,9 +244,6 @@ app.controller('tenant2_controller', ['$scope','$http', 'fileUpload', function($
 	   }
 
 	    $scope.grade=function(){
-	        console.log(document.getElementById("complete").checked);
-	        console.log("Points---",$scope.points);
-	        console.log("Comments--",$scope.comments);
 	        
 	        if(document.getElementById("complete").checked){
 	        	$scope.status="complete";
@@ -253,17 +262,21 @@ app.controller('tenant2_controller', ['$scope','$http', 'fileUpload', function($
  	            	"points":$scope.points
  	            }
 	        }).success(function(data){
-	        	console.log("Done grading");
-	        	$scope.submission=false;	
+	        	if(data.statusCode==200){
+	        		$scope.submission_valid=false;
+	            	$scope.submission_invalid=true;
+	        	}
+	        	else{
+	        		$scope.submission_valid=true;
+	            	$scope.submission_invalid=false;
+	        	}	
 	        });
 	    };
 
     $scope.uploadFile = function(){
         var file = $scope.myFile;
-        console.log("Reporting fro uploadFile POST Angular");
-        var uploadUrl = "http://localhost:92/uploadCode";
+        var uploadUrl = "http://localhost:92/tenant3/uploadCode";
         fileUpload.uploadFileToUrl(file, uploadUrl, function(data) {
-        	//console.log(data.Upload_Code_Status);
         	$scope.upload_status=true;
         	$scope.status_code = data.Upload_Code_Status;
         	$scope.show_generate_uml=true;
@@ -276,18 +289,17 @@ app.controller('tenant2_controller', ['$scope','$http', 'fileUpload', function($
     
 app.controller('tenant4_controller', ['$scope','$http', 'fileUpload', function($scope,$http, fileUpload){
 
-    console.log("Reporting from Tenant 4 controller");
-	$scope.showuml=false;
+    $scope.showuml=false;
 	$scope.showgrade=false;
 	$scope.upload_status=false;
 	$scope.submission=true;
-	
+	$scope.submission_valid=true;
+	$scope.submission_invalid=true;
 	    $scope.generateUML=function(){
 
-        console.log("Reporting from generateUML POST Angular");
         $http({
             method: 'POST',
-            url: "http://127.0.0.1:93/generateUML",
+            url: "http://127.0.0.1:93/tenant4/generateUML",
         }).success(function(data){
             $scope.getUML();
             })
@@ -296,7 +308,7 @@ app.controller('tenant4_controller', ['$scope','$http', 'fileUpload', function($
 
 	        $http({
             method: 'GET',
-            url: "http://127.0.0.1:93/getUML",
+            url: "http://127.0.0.1:93/tenant4/getUML",
         }).success(function(data){
             $scope.image=data.result;
             $scope.showuml=true;
@@ -305,11 +317,8 @@ app.controller('tenant4_controller', ['$scope','$http', 'fileUpload', function($
 	   }
 
 	    $scope.grade=function(){
-	        console.log(document.getElementById("complete").checked);
-	        console.log("Points---",$scope.points);
-	        console.log("Comments--",$scope.comments);
-	        
-	        if(document.getElementById("complete").checked){
+	    
+	    	if(document.getElementById("complete").checked){
 	        	$scope.status="complete";
 	        }
 	        else
@@ -326,16 +335,21 @@ app.controller('tenant4_controller', ['$scope','$http', 'fileUpload', function($
  	            	"points":$scope.points
  	            }
 	        }).success(function(data){
-	        	console.log("Done grading");
-	        	$scope.submission=false;	
+	        	if(data.statusCode==200){
+	        		$scope.submission_valid=false;
+	            	$scope.submission_invalid=true;
+	        	}
+	        	else{
+	        		$scope.submission_valid=true;
+	            	$scope.submission_invalid=false;
+	        	}	
 	        });
 	    };
 
     $scope.uploadFile = function(){
         var file = $scope.myFile;
-        var uploadUrl = "http://127.0.0.1:93/uploadCode";
+        var uploadUrl = "http://127.0.0.1:93/tenant4/uploadCode";
         fileUpload.uploadFileToUrl(file, uploadUrl, function(data) {
-        	console.log(data.Upload_Code_Status);
         	$scope.upload_status=true;
         	$scope.status_code = data.Upload_Code_Status;
         	$scope.show_generate_uml=true;

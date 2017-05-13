@@ -9,7 +9,7 @@ var express = require('express')
   , http = require('http')
   , path = require('path');
 
-var database=require('./routes/database');
+
 var grade=require('./routes/grade');
 var login=require('./routes/login');
 var app = express();
