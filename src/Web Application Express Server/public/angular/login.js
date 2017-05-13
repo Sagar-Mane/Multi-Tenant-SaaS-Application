@@ -9,9 +9,30 @@ app.config(['$routeProvider',
     }]);
 
 app.controller("login_controller",function($scope,$http){
+	$scope.invalid=true;
 	console.log("Reporting from login controller");
 	    $scope.login=function(){
 	            console.log("Reporting from login function");
-	            window.location.assign("/");
+	            console.log("username=",$scope.username);
+	            console.log("password",$scope.password);
+	            $http({
+	            	url:"http://localhost:3000/login",
+	            	method:"POST",
+	            	data:{
+	            		"username":$scope.username,
+	            		"password":$scope.password
+	            	}
+	            	
+	            }).success(function(data){
+	            	console.log("Successful login");
+	            	if(data.statusCode==401){
+	            		$scope.invalid=false;
+	            	}
+	            	else
+	            	window.location.assign("/");
+	            })
+	            
+	            
+	            
 	};
 	});

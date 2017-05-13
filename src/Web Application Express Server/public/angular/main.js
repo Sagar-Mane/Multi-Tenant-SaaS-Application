@@ -91,18 +91,24 @@ app.controller('tenant1_controller', ['$scope','$http', 'fileUpload', function($
 
 	    $scope.grade=function(){
 	        console.log("Reporting from grade POST Angular");
+	        if(document.getElementById("complete").checked){
+	        	$scope.status="complete";
+	        }
+	        else
+	        	$scope.status="Incomplete"
 	        console.log(document.getElementById("complete").checked);
 	        var status=document.getElementById("complete").checked;
 	        console.log("Points---",$scope.points);
 	        console.log("Comments--",$scope.comments);
 	        $http({
 	            method: 'POST',
-	            url: "/grade",
+	            url: "/submitGrades",
 	            data:{
-	            	"id":"t1",
-	            	"points":$scope.points,
-	            	"status":status,
-	            	"comments":$scope.comments
+	            	"tenant_id":1,
+	            	"status":$scope.status,
+	            	"comments":$scope.comments,
+	            	"student_id":$scope.student_id,
+	            	"points":$scope.points
 	            }
 	        }).success(function(data){
 	        	console.log("Done grading");
@@ -159,15 +165,23 @@ app.controller('tenant2_controller', ['$scope','$http', 'fileUpload', function($
 	        console.log("Reporting from grade POST Angular");
 	        console.log("Points---",$scope.points);
 	        console.log("Comments--",$scope.comments);
+	        
+	        if(document.getElementById("complete").checked){
+	        	$scope.status="complete";
+	        }
+	        else
+	        	$scope.status="Incomplete"
+	        
 	        $http({
 	            method: 'POST',
-	            url: "/grade",
+	            url: "/submitGrades",
 	            data:{
-	            	"id":"t2",
-	            	"points":$scope.points,
-	            	"status":status,
-	            	"comments":$scope.comments
-	            }
+	 	            	"tenant_id":2,
+	 	            	"status":$scope.status,
+	 	            	"comments":$scope.comments,
+	 	            	"student_id":$scope.student_id,
+	 	            	"points":$scope.points
+	 	            }
 	        }).success(function(data){
 	        	console.log("Done grading");
 	        	$scope.submission=false;	
@@ -221,15 +235,23 @@ app.controller('tenant2_controller', ['$scope','$http', 'fileUpload', function($
 	        console.log(document.getElementById("complete").checked);
 	        console.log("Points---",$scope.points);
 	        console.log("Comments--",$scope.comments);
+	        
+	        if(document.getElementById("complete").checked){
+	        	$scope.status="complete";
+	        }
+	        else
+	        	$scope.status="Incomplete"
+	        
 	        $http({
 	            method: 'POST',
-	            url: "/grade",
+	            url: "/submitGrades",
 	            data:{
-	            	"id":"t3",
-	            	"points":$scope.points,
-	            	"status":status,
-	            	"comments":$scope.comments
-	            }
+ 	            	"tenant_id":3,
+ 	            	"status":$scope.status,
+ 	            	"comments":$scope.comments,
+ 	            	"student_id":$scope.student_id,
+ 	            	"points":$scope.points
+ 	            }
 	        }).success(function(data){
 	        	console.log("Done grading");
 	        	$scope.submission=false;	
@@ -286,15 +308,23 @@ app.controller('tenant4_controller', ['$scope','$http', 'fileUpload', function($
 	        console.log(document.getElementById("complete").checked);
 	        console.log("Points---",$scope.points);
 	        console.log("Comments--",$scope.comments);
+	        
+	        if(document.getElementById("complete").checked){
+	        	$scope.status="complete";
+	        }
+	        else
+	        	$scope.status="Incomplete"
+	        
 	        $http({
 	            method: 'POST',
-	            url: "/grade",
+	            url: "/submitGrades",
 	            data:{
-	            	"id":"t4",
-	            	"points":$scope.points,
-	            	"status":status,
-	            	"comments":$scope.comments
-	            }
+ 	            	"tenant_id":4,
+ 	            	"status":$scope.status,
+ 	            	"comments":$scope.comments,
+ 	            	"student_id":$scope.student_id,
+ 	            	"points":$scope.points
+ 	            }
 	        }).success(function(data){
 	        	console.log("Done grading");
 	        	$scope.submission=false;	
@@ -307,7 +337,8 @@ app.controller('tenant4_controller', ['$scope','$http', 'fileUpload', function($
         fileUpload.uploadFileToUrl(file, uploadUrl, function(data) {
         	console.log(data.Upload_Code_Status);
         	$scope.upload_status=true;
-        	$scope.status_code = data.status;
+        	$scope.status_code = data.Upload_Code_Status;
+        	$scope.show_generate_uml=true;
         });
     };
 }]);

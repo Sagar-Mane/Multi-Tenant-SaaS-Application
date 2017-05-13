@@ -16,8 +16,8 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
         
-        <script src="public/angular/login.js"></script>
-        <link rel="stylesheet" href="public/styles/login_style.css">
+        <script src="angular/login.js"></script>
+        <link rel="stylesheet" href="stylesheets/login_style.css">
 
     </head>
 
@@ -48,8 +48,14 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md- " style="margin: 10px;">
+					<div class="alert alert-danger" ng-hide="invalid">
+						<strong>Invalid username or password</strong>
+					</div>
+			</div>
                 </div>
             </div>
+            
         </div>
     </body>
 </html>
