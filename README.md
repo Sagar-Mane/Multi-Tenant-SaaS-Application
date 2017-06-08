@@ -10,3 +10,7 @@
 - Design "Grader" login that "Pins" all interactions with the Application to the respective Tenants.
 - Implement feature toggle to provide tenant specific customization for grading the Java Code.
 - Application should support Data Multi-Tenancy by managing either Extension Columns or Tables in a single Relational Database using Amazon RDS.
+
+## Demo and Directions Video 
+<a href="https://www.youtube.com/watch?v=V3lPU9NaLVk"><img src="https://github.com/Sagar-Mane/Multi-Tenant-SaaS-Application/blob/master/docs/thumbnail.png" 
+alt="Demo and Directions Video" width="300" height="180" border="10" /></a>
