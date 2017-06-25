@@ -6,7 +6,6 @@ It is a Software as a Service application which provides UML parser as a backend
 - [Getting Started](#getting-started)
 - [ Architecure Diagram](#architecure-diagram)
 - [Technology Stack](#technology-stack)
-- [Screenshots](#screenshots)
 - [Features](#features)
 - [Demo Video](#demo-video)
 - [Future Enhancements](#future-enhancements)
@@ -30,12 +29,19 @@ Objective was to develop a Multi-Tenant, Cloud Scalable, Multi-AZ SaaS App using
 - HTML5 (Markup)
 - CSS3 (UI/UX)
 
-## Screenshots
-
 ## Features
+- Grader can submit java source code as a zip file
+- Web server will unzip the java source code
+- UML parser will generate class diagram from the submitted java source code
+- Grader will be able to see the class diagram in web application
+- Grader can then grade the class diagram with tenant specific grading fields
+- Servers are configured to auto scale and load balance in using Application Gateway in AWS.
 
 ## Demo Video 
 <p align="center"><a href="https://www.youtube.com/watch?v=V3lPU9NaLVk"><img src="https://github.com/Sagar-Mane/Multi-Tenant-SaaS-Application/blob/master/docs/thumbnail.png" 
 alt="Demo and Directions Video" width="500" height="300" border="10" /></a></p>
 
 ## Future Enhancements
+- Application can have student login page so that each student will be able to submit their assignments.
+- There can be a dashboard for grader where he will see all the pinned submissions.
+- Application should accomodate other types of submission apart from java source code.
