@@ -17,6 +17,7 @@ Objective was to develop a Multi-Tenant, Cloud Scalable, Multi-AZ SaaS App using
 ## Getting Started
 
 ## Architecure Diagram
+<p align="center"><img src="https://github.com/Sagar-Mane/Multi-Tenant-SaaS-Application/blob/master/docs/Architecture%20Diagram.png" /></p>
 
 ## Technology Stack
 
